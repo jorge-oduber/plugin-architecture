@@ -4,4 +4,4 @@ rm -rf build || true
 
 ./gradlew build
 
-./gradlew app:run
+./gradlew apps:java-application:run

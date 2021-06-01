@@ -9,4 +9,4 @@ REM create artifacts using gradle
 call gradle build
 
 REM run demo
-call gradle app:run
+call gradle apps:java-application:run

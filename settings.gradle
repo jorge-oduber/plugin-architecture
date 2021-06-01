@@ -1,5 +1,6 @@
 include 'api'
-include 'app'
+include 'apps'
+include 'apps:java-application'
 include 'plugins'
 include 'plugins:plugin-welcome'
 include 'plugins:plugin-hello'
