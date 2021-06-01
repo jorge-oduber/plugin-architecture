@@ -1,0 +1,35 @@
+subprojects {
+
+    configurations {
+        pluginDeps.extendsFrom implementation
+    }
+
+    jar {
+        manifest.attributes.put('Plugin-Class', "${pluginClass}")
+        manifest.attributes.put('Plugin-Id', "${pluginId}")
+        manifest.attributes.put('Plugin-Version', "${archiveVersion}")
+        manifest.attributes.put('Plugin-Provider', "${pluginProvider}")
+    }
+
+    task plugin(type: Jar) {
+        archiveBaseName.set("${pluginId}")
+        into('classes') {
+            with jar
+        }
+        into('lib') {
+            from configurations.pluginDeps
+        }
+        archiveExtension.set('zip')
+    }
+
+    task assemblePlugin(type: Copy) {
+        from plugin
+        into pluginsDir
+    }
+}
+
+task assemblePlugins(type: Copy) {
+    dependsOn subprojects.assemblePlugin
+}
+
+build.dependsOn project.tasks.assemblePlugins

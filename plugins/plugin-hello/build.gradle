@@ -1,0 +1,6 @@
+dependencies {
+    // compileOnly important!!! We do not want to put the api into the zip file since the main program has it already!
+    compileOnly project(':api')
+    compileOnly("org.pf4j:pf4j:${pf4jVersion}")
+    annotationProcessor("org.pf4j:pf4j:${pf4jVersion}")
+}
