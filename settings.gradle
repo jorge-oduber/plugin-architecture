@@ -1,6 +1,9 @@
 include 'api'
 include 'apps'
 include 'apps:java-application'
+include 'apps:spring-application'
 include 'plugins'
 include 'plugins:plugin-welcome'
 include 'plugins:plugin-hello'
+include 'spring-plugin'
+

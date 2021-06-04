@@ -1,3 +1,6 @@
+plugins {
+  id 'java'
+}
 dependencies {
     implementation("org.pf4j:pf4j:${pf4jVersion}")
     implementation("org.apache.commons:commons-lang3:3.5")

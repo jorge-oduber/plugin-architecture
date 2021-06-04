@@ -1,0 +1,45 @@
+plugins {
+  id 'java'
+}
+
+configurations {
+  pluginDeps.extendsFrom implementation
+}
+
+dependencies {
+  compileOnly project(':api')
+  compileOnly("org.pf4j:pf4j:${pf4jVersion}")
+  annotationProcessor("org.pf4j:pf4j:${pf4jVersion}")
+  compileOnly("org.pf4j:pf4j-spring:0.7.0")
+  implementation 'com.squareup.okhttp3:okhttp:3.14.9'
+  pluginDeps 'com.squareup.okhttp3:okhttp:3.14.9'
+}
+
+jar {
+  manifest.attributes.put('Plugin-Class', "${pluginClass}")
+  manifest.attributes.put('Plugin-Id', "${pluginId}")
+  manifest.attributes.put('Plugin-Version', "${archiveVersion}")
+  manifest.attributes.put('Plugin-Provider', "${pluginProvider}")
+}
+
+task plugin(type: Jar) {
+  archiveBaseName.set("${pluginId}")
+  into('classes') {
+    with jar
+  }
+  into('lib') {
+    from configurations.pluginDeps
+  }
+  archiveExtension.set('zip')
+}
+
+task assemblePlugin(type: Copy) {
+  from plugin
+  into pluginsDir
+}
+
+task assemblePlugins(type: Copy) {
+  dependsOn assemblePlugin
+}
+
+build.dependsOn project.tasks.assemblePlugins

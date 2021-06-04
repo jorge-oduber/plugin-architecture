@@ -2,7 +2,6 @@
 ext.pluginsDir = rootProject.buildDir.path + '/plugins'
 
 subprojects {
-  apply plugin: 'java'
   
   repositories {
     mavenCentral()

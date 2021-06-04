@@ -1,4 +1,7 @@
-apply plugin: 'application'
+plugins {
+  id 'java'
+  id 'application'
+}
 
 mainClassName = 'org.pf4j.demo.Boot'
 
@@ -24,9 +27,7 @@ task uberjar(type: Jar, dependsOn: ['compileJava']) {
   }
   from files(sourceSets.main.output.classesDirs)
   from files(sourceSets.main.resources)
-  manifest {
-    attributes('Main-Class': mainClassName)
-  }
+  manifest.attributes('Main-Class': mainClassName)
   
   archiveBaseName.set("${project.name}-plugin-demo")
   archiveClassifier.set("uberjar")

@@ -29,7 +29,7 @@ public class HelloPlugin extends Plugin {
 
         @Override
         public String getGreeting() {
-            return "Hello";
+            return "Hello plugin....";
         }
 
     }
