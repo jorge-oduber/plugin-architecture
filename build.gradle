@@ -8,6 +8,6 @@ subprojects {
   }
 }
 
-task build(dependsOn: [':app:uberjar'])
+task build(dependsOn: [':apps:java-application:uberjar'])
 
 

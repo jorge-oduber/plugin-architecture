@@ -1,5 +1,6 @@
 package org.pf4j.demo.welcome;
 
+import org.apache.commons.lang3.StringUtils;
 import org.pf4j.Extension;
 import org.pf4j.Plugin;
 import org.pf4j.PluginWrapper;
@@ -17,7 +18,7 @@ public class WelcomePlugin extends Plugin {
 
     @Override
     public void start() {
-        logger.info("WelcomePlugin.start()");
+        logger.info(StringUtils.center("WelcomePlugin.start()", 4));
     }
 
     @Override

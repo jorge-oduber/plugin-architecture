@@ -1,5 +1,4 @@
 plugins {
-  id 'java'
   id 'application'
 }
 
@@ -17,6 +16,27 @@ dependencies {
   implementation "org.slf4j:slf4j-simple:1.7.25"
 }
 
+jar {
+  manifest {
+    attributes(
+      'Main-Class': 'org.pf4j.demo.Boot',
+      "Class-Path": configurations.compileClasspath.collect { "lib/${it.getName()}" }.join(' ')
+    )
+  }
+}
+
+task copyDeps(type: Copy) {
+  from configurations.compileClasspath
+  into "${buildDir}/libs/lib"
+}
+
+build.dependsOn project.tasks.copyDeps
+
+application {
+  // Define the main class for the application.
+  mainClass.set('org.pf4j.demo.Boot')
+}
+
 task uberjar(type: Jar, dependsOn: ['compileJava']) {
   zip64 true
   from configurations.runtimeClasspath.asFileTree.files.collect {
@@ -29,6 +49,6 @@ task uberjar(type: Jar, dependsOn: ['compileJava']) {
   from files(sourceSets.main.resources)
   manifest.attributes('Main-Class': mainClassName)
   
-  archiveBaseName.set("${project.name}-plugin-demo")
+  archiveBaseName.set("${project.name}")
   archiveClassifier.set("uberjar")
 }

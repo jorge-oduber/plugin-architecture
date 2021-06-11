@@ -13,6 +13,7 @@ subprojects {
     manifest.attributes.put('Plugin-Provider', "${pluginProvider}")
   }
   
+  // copy lib and jar into 'build/plugins'
   task plugin(type: Jar) {
     archiveBaseName.set("${pluginId}")
     into('classes') {
